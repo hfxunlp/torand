@@ -25,9 +25,9 @@ Install with `pip install torand`.
 
 #### Main API
 
-`torandom(k, fast_mode=True)`
+`torandom(k, fast_mode=True, use_cache=True)`
 
-Generate `k` random bytes. Where `fast_mode` indicates the use of hash-based fast generation (default to `True`).
+Generate `k` random bytes. Where `fast_mode` (default to `True`) and `use_cache` (default to `True`) indicate the use of the hash-based fast generation and a small random bytes' cache respectively. Setting `use_cache` to `True` is beneficial for the performance when the function will be called to generate a small number (< 32) of random bytes for many times, but insecure as the cache can be manually assigned by the other codes that imports this library.
 
 #### Example
 
@@ -35,7 +35,7 @@ Generate `k` random bytes. Where `fast_mode` indicates the use of hash-based fas
 from torand import torandom
 
 k = 127
-rs = torandom(k, fast_mode=True)
+rs = torandom(k, fast_mode=True, use_cache=True)
 print(rs)
 print(len(rs) == k)
 ```
